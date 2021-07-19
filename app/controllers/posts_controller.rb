@@ -2,7 +2,8 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
 
   def index
-    @posts = Post.order(created_at: :desc)
+    @posts = policy_scope(Post).order(created_at: :desc)
+    authorize @posts
   end
 
   def show
